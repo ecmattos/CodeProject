@@ -27,6 +27,6 @@ $factory->define(CodeProject\Client::class, function (Faker\Generator $faker) {
         'email' 		=> $faker->safeEmail,
         'phone' 		=> $faker->phoneNumber,
         'address' 		=> $faker->address,
-        'obs' 			=> $faker->setence,
+        'obs' 			=> $faker->sentence,
     ];
 });
