@@ -82,6 +82,15 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        \CodeProject\Client::find($id)->delete();
+        try 
+        {
+            \CodeProject\Client::find($id)->delete();
+            return ['success' => true, 'Cliente excluído com sucesso !'];
+            
+        } 
+        catch (\FatalThrowableError $e) 
+        {
+            return ['error' => true, 'Opss... Houve algum problema e não foi possível excluir o Cliente desejado.'];
+        }
     }
 }
