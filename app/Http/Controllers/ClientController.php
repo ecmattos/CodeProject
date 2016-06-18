@@ -37,7 +37,11 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        return \CodeProject\Client::create($request->all());
+        $input = $request->all();
+
+        $client = \CodeProject\Client::create($input);
+
+        return ['success' => true, 'Cliente incluído com sucesso !'];
     }
 
     /**
@@ -48,7 +52,14 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        return \CodeProject\Client::find($id);
+        try 
+        {
+            \CodeProject\Client::findOrFail($id);
+        } 
+        catch (\Exception $e) 
+        {
+            return ['error' => true, 'Opss... Houve algum problema e não foi possível localizar o Cliente desejado.'];
+        }
     }
 
     /**
@@ -71,7 +82,22 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+
+        try 
+        {
+            \CodeProject\Client::findOrFail($id)->update($input);
+            return ['success' => true, 'Cliente alterado com sucesso !'];
+        } 
+        catch (ModelNotFoundException $e) 
+        {
+            return ['error' => true, 'Opss... Não encontramos o Cliente informado.'];
+        }
+
+        catch (\Exception $e) 
+        {
+            return ['error' => true, 'Opss... Houve algum problema e não foi possível alterar os dados do Cliente desejado.'];
+        }
     }
 
     /**
@@ -84,11 +110,15 @@ class ClientController extends Controller
     {
         try 
         {
-            \CodeProject\Client::find($id)->delete();
+            \CodeProject\Client::findOrFail($id)->delete();
             return ['success' => true, 'Cliente excluído com sucesso !'];
-            
         } 
-        catch (\FatalThrowableError $e) 
+        catch (ModelNotFoundException $e) 
+        {
+            return ['error' => true, 'Opss... Não encontramos o Cliente informado.'];
+        }
+
+        catch (\Exception $e) 
         {
             return ['error' => true, 'Opss... Houve algum problema e não foi possível excluir o Cliente desejado.'];
         }
