@@ -3,12 +3,20 @@
 namespace CodeProject\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use CodeProject\Http\Requests;
-use CodeProject\Http\Controllers\Controller;
+use CodeProject\Repositories\ClientRepository;
+use CodeProject\Services\ClientService;
 
 class ClientController extends Controller
 {
+    private $repository;
+    private $service;
+
+    public function __construct(ClientRepository $repository, ClientService $service)
+    {
+        $this->repository = $repository;
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +24,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return \CodeProject\Client::all();
+        return $this->repository->all();
     }
 
     /**\CodeProject\Http\Middleware\VerifyCsrfToken::class,
@@ -39,9 +47,9 @@ class ClientController extends Controller
     {
         $input = $request->all();
 
-        $client = \CodeProject\Client::create($input);
+        $this->service->create($input);
 
-        return ['success' => true, 'Cliente incluído com sucesso !'];
+        return ['success' => true, 'msg' => 'Cliente incluído com sucesso !'];
     }
 
     /**
@@ -54,11 +62,11 @@ class ClientController extends Controller
     {
         try 
         {
-            \CodeProject\Client::findOrFail($id);
+            $this->repository->find($id);
         } 
         catch (\Exception $e) 
         {
-            return ['error' => true, 'Opss... Houve algum problema e não foi possível localizar o Cliente desejado.'];
+            return ['error' => true, 'msg' => 'Opss... Houve algum problema e não foi possível localizar o Cliente desejado.'];
         }
     }
 
@@ -86,17 +94,17 @@ class ClientController extends Controller
 
         try 
         {
-            \CodeProject\Client::findOrFail($id)->update($input);
+            $this->service->update($input, $id);
             return ['success' => true, 'Cliente alterado com sucesso !'];
         } 
         catch (ModelNotFoundException $e) 
         {
-            return ['error' => true, 'Opss... Não encontramos o Cliente informado.'];
+            return ['error' => true, 'msg' => 'Opss... Não encontramos o Cliente informado.'];
         }
 
         catch (\Exception $e) 
         {
-            return ['error' => true, 'Opss... Houve algum problema e não foi possível alterar os dados do Cliente desejado.'];
+            return ['error' => true, 'msg' => 'Opss... Houve algum problema e não foi possível alterar os dados do Cliente desejado.'];
         }
     }
 
@@ -110,17 +118,17 @@ class ClientController extends Controller
     {
         try 
         {
-            \CodeProject\Client::findOrFail($id)->delete();
-            return ['success' => true, 'Cliente excluído com sucesso !'];
+            $this->repository->delete($id);
+            return ['success' => true, 'msg' => 'Cliente excluído com sucesso !'];
         } 
         catch (ModelNotFoundException $e) 
         {
-            return ['error' => true, 'Opss... Não encontramos o Cliente informado.'];
+            return ['error' => true, 'msg' => 'Opss... Não encontramos o Cliente informado.'];
         }
 
         catch (\Exception $e) 
         {
-            return ['error' => true, 'Opss... Houve algum problema e não foi possível excluir o Cliente desejado.'];
+            return ['error' => true, 'msg' => 'Opss... Houve algum problema e não foi possível excluir o Cliente desejado.'];
         }
     }
 }
