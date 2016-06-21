@@ -5,6 +5,8 @@ namespace CodeProject\Services;
 use CodeProject\Repositories\ClientRepository;
 use CodeProject\Validators\ClientValidator;
 
+use Prettus\Validator\Exceptions\ValidatorException;
+
 class ClientService
 {
 	protected $repository;
