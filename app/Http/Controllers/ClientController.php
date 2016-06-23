@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use CodeProject\Repositories\ClientRepository;
 use CodeProject\Services\ClientService;
 
+use Prettus\Validator\Exceptions\ValidatorException;
+
 class ClientController extends Controller
 {
     private $repository;
@@ -45,11 +47,19 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-
-        $this->service->create($input);
-
-        return ['success' => true, 'msg' => 'Cliente incluído com sucesso !'];
+        try
+        {
+            $input = $request->all();
+            $this->service->create($input);
+        }
+        catch (ValidatorException $e)
+        {
+            return 
+            [
+                'error' => true,
+                'message' => $e->getMessageBag()
+            ];
+        }
     }
 
     /**
@@ -66,7 +76,11 @@ class ClientController extends Controller
         } 
         catch (\Exception $e) 
         {
-            return ['error' => true, 'msg' => 'Opss... Houve algum problema e não foi possível localizar o Cliente desejado.'];
+            return 
+            [
+                'error' => true, 
+                'message' => 'Opss... Houve algum problema e não foi possível localizar o Cliente desejado.'
+            ];
         }
     }
 
@@ -90,21 +104,18 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->all();
-
-        try 
+        try
         {
-            $this->service->update($input, $id);
-            return ['success' => true, 'Cliente alterado com sucesso !'];
-        } 
-        catch (ModelNotFoundException $e) 
-        {
-            return ['error' => true, 'msg' => 'Opss... Não encontramos o Cliente informado.'];
+            $input = $request->all();
+            $this->service->update($id, $input);
         }
-
-        catch (\Exception $e) 
+        catch (ValidatorException $e)
         {
-            return ['error' => true, 'msg' => 'Opss... Houve algum problema e não foi possível alterar os dados do Cliente desejado.'];
+            return 
+            [
+                'error' => true,
+                'message' => $e->getMessageBag()
+            ];
         }
     }
 
@@ -119,16 +130,28 @@ class ClientController extends Controller
         try 
         {
             $this->repository->delete($id);
-            return ['success' => true, 'msg' => 'Cliente excluído com sucesso !'];
+            return 
+            [
+                'success' => true, 
+                'messsage' => 'Cliente excluído com sucesso !'
+            ];
         } 
         catch (ModelNotFoundException $e) 
         {
-            return ['error' => true, 'msg' => 'Opss... Não encontramos o Cliente informado.'];
+            return 
+            [
+                'error' => true, 
+                'message' => 'Opss... Não encontramos o Cliente informado.'
+            ];
         }
 
         catch (\Exception $e) 
         {
-            return ['error' => true, 'msg' => 'Opss... Houve algum problema e não foi possível excluir o Cliente desejado.'];
+            return 
+            [
+                'error' => true, 
+                'message' => 'Opss... Houve algum problema e não foi possível excluir o Cliente desejado.'
+            ];
         }
     }
 }
