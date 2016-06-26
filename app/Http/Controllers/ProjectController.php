@@ -26,7 +26,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return $this->repository->all();
+        return $this->repository->with(['client', 'owner'])->all();
     }
 
     /**\CodeProject\Http\Middleware\VerifyCsrfToken::class,

@@ -12,4 +12,15 @@ class Project extends Model implements Transformable
 
     protected $fillable = [];
 
+    public function client()
+	{
+		return $this->belongsTo('CodeProject\Entities\Client'); 
+	}
+
+	public function owner()
+	{
+		return $this->belongsTo('CodeProject\Entities\User'); 
+	}
+
 }
+
