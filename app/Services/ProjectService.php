@@ -27,4 +27,16 @@ class ProjectService
 		$this->validator->with($data)->passesOrFail();
 		return $this->repository->update($data, $id);
 	}
+
+	public function addMember(array $data)
+	{
+		$this->validator->with($data)->passesOrFail();
+		return $this->repository->create($data);
+	}
+
+	public function removeMember(array $data)
+	{
+		$this->validator->with($data)->passesOrFail();
+		return $this->repository->create($data);
+	}
 }

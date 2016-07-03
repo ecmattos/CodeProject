@@ -3,17 +3,17 @@
 namespace CodeProject\Http\Controllers;
 
 use Illuminate\Http\Request;
-use CodeProject\Repositories\ProjectRepository;
-use CodeProject\Services\ProjectService;
+use CodeProject\Repositories\ProjectTaskRepository;
+use CodeProject\Services\ProjectTaskService;
 
 use Prettus\Validator\Exceptions\ValidatorException;
 
-class ProjectController extends Controller
+class ProjectTaskController extends Controller
 {
     private $repository;
     private $service;
 
-    public function __construct(ProjectRepository $repository, ProjectService $service)
+    public function __construct(ProjectTaskRepository $repository, ProjectTaskService $service)
     {
         $this->repository = $repository;
         $this->service = $service;
@@ -24,12 +24,12 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return $this->repository->with(['client', 'owner'])->all();
+        return $this->repository->findWhere(['project_id' => $id]);
     }
 
-    /**\CodeProject\Http\Middleware\VerifyCsrfToken::class,
+    /**\CodeProjectTask\Http\Middleware\VerifyCsrfToken::class,
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -68,18 +68,18 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $taskId)
     {
         try 
         {
-            return $this->repository->find($id);
+            return $this->repository->findWhere(['project_id' => $id, 'id' => $taskId]);
         } 
         catch (\Exception $e) 
         {
             return 
             [
                 'error' => true, 
-                'message' => 'Opss... Houve algum problema e não foi possível localizar o Projeto desejado.'
+                'message' => 'Opss... Houve algum problema e não foi possível localizar a Tarefa desejada.'
             ];
         }
     }
@@ -102,12 +102,12 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $taskId)
     {
         try
         {
             $input = $request->all();
-            $this->service->update($id, $input);
+            $this->service->update($taskId, $input);
         }
         catch (ValidatorException $e)
         {
@@ -125,11 +125,11 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($taskId)
     {
         try 
         {
-            $this->repository->delete($id);
+            $this->repository->delete($taskId);
             return 
             [
                 'success' => true, 
@@ -141,7 +141,7 @@ class ProjectController extends Controller
             return 
             [
                 'error' => true, 
-                'message' => 'Opss... Não encontramos o Projeto informado.'
+                'message' => 'Opss... Não encontramos a Tarefa informada.'
             ];
         }
 
@@ -150,7 +150,7 @@ class ProjectController extends Controller
             return 
             [
                 'error' => true, 
-                'message' => 'Opss... Houve algum problema e não foi possível excluir o Projeto desejado.'
+                'message' => 'Opss... Houve algum problema e não foi possível excluir a Tarefa desejada.'
             ];
         }
     }

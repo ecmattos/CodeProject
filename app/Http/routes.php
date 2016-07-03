@@ -15,11 +15,29 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/client', 'ClientController@index');
+Route::post('oauth/access_token', function() {
+    return Response::json(Authorizer::issueAccessToken());
+});
+
+Route::get('/client', ['middleware' => 'oauth', 'uses' => 'ClientController@index']);
 Route::post('/client', 'ClientController@store');
 Route::get('/client/{id}', 'ClientController@show');
 Route::delete('/client/{id}', 'ClientController@destroy');
 Route::put('/client/{id}', 'ClientController@update');
+
+Route::get('/project/{id}/note', 'ProjectNoteController@index');
+Route::post('/project/{id}/note', 'ProjectNoteController@store');
+Route::get('/project/{id}/note/{noteId}', 'ProjectNoteController@show');
+Route::put('/project/{id}/note/{noteId}', 'ProjectNoteController@update');
+Route::delete('/project/{id}/note/{noteId}', 'ProjectNoteController@destroy');
+
+Route::get('/project/{id}/task', 'ProjectTaskController@index');
+Route::post('/project/{id}/task', 'ProjectTaskController@store');
+Route::get('/project/{id}/task/{taskId}', 'ProjectTaskController@show');
+Route::put('/project/{id}/task/{taskId}', 'ProjectTaskController@update');
+Route::delete('/project/{id}/task/{taskId}', 'ProjectTaskController@destroy');
+
+Route::get('/project/{id}/member', 'ProjectMemberController@index');
 
 Route::get('/project', 'ProjectController@index');
 Route::post('/project', 'ProjectController@store');
