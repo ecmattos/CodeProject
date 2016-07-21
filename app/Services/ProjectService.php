@@ -2,6 +2,7 @@
 
 namespace CodeProject\Services;
 
+use Prettus\Validator\Contracts\ValidatorInterface;
 use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Validators\ProjectValidator;
 
@@ -18,13 +19,14 @@ class ProjectService
 
 	public function create(array $data)
 	{
-		$this->validator->with($data)->passesOrFail();
+		$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 		return $this->repository->create($data);
 	}
 
 	public function update($id, array $data)
 	{
-		$this->validator->with($data)->passesOrFail();
+		$this->validator->setId($id); //funcao q set id para regra do update
+		$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 		return $this->repository->update($data, $id);
 	}
 

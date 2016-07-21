@@ -70,18 +70,25 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        try 
-        {
-            return $this->repository->find($id);
-        } 
-        catch (\Exception $e) 
-        {
-            return 
-            [
-                'error' => true, 
-                'message' => 'Opss... Houve algum problema e não foi possível localizar o Projeto desejado.'
-            ];
-        }
+        return ['userId' => \Authorizer::getResourceOwnerId()];
+
+        #if($this->repository->isOwner($id,))
+        #{
+        #    return ['sucess' => false];
+
+            #try 
+            #{
+            #    return $this->repository->find($id);
+            #} 
+            #catch (\Exception $e) 
+            #{
+            #    return 
+            #    [
+            #        'error' => true, 
+            #        'message' => 'Opss... Houve algum problema e não foi possível localizar o Projeto desejado.'
+            #    ];
+            #}
+        #}
     }
 
     /**
