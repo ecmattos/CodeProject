@@ -6,7 +6,7 @@ use CodeProject\Repositories\ProjectRepository;
 
 use Closure;
 
-class CheckOwnerProject
+class CheckProjectOwner
 {
     private $repository;
 

@@ -26,7 +26,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return $this->repository->with(['client', 'owner'])->all();
+        return $this->repository->findWhere(['owner_id' => \Authorizer::getResourceOwnerId()]);
     }
 
     /**\CodeProject\Http\Middleware\VerifyCsrfToken::class,
@@ -70,6 +70,11 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
+        if($this->checkProjectPermissions($id) == false)
+        {
+            return ['error' => 'Access Denied'];
+        }
+
         return $this->repository->find($id);
     }
 
@@ -93,6 +98,11 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($this->checkProjectOwner($id) == false)
+        {
+            return ['error' => 'Access Denied'];
+        }
+
         try
         {
             $input = $request->all();
@@ -116,6 +126,11 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
+        if($this->checkProjectPermissions($id) == false)
+        {
+            return ['error' => 'Access Denied'];
+        }
+
         try 
         {
             $this->repository->delete($id);
@@ -142,5 +157,29 @@ class ProjectController extends Controller
                 'message' => 'Opss... Houve algum problema e não foi possível excluir o Projeto desejado.'
             ];
         }
+    }
+
+    private function checkProjectOwner($projectId)
+    {
+        $userId = \Authorizer::getResourceOwnerId();
+
+        return $this->repository->isOwner($projectId, $userId);
+    }
+ 
+    private function checkProjectMember($projectId)
+    {
+        $userId = \Authorizer::getResourceOwnerId();
+
+        return $this->repository->hasMember($projectId, $userId);
+    }
+
+    private function checkProjectPermissions($projectId)
+    {
+        if ($this->checkProjectOwner($projectId) or $this->checkProjectMember($projectId))
+        {
+            return true;
+        }
+
+        return false;
     }
 }
