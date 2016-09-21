@@ -14,5 +14,4 @@ class ProjectMember extends Model implements Transformable
     	'project_id',
     	'member_id'
     ];
-
 }

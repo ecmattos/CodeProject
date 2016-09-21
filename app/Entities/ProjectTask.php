@@ -18,7 +18,6 @@ class ProjectTask extends Model implements Transformable
     	'status'
 	];
 
-
 	public function project()
     {
     	return $this->belongsTo('CodeProject\Entities\Project');
