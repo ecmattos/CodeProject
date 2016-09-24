@@ -45,5 +45,10 @@ class Project extends Model implements Transformable
         return $this->hasMany('CodeProject\Entities\ProjectTask');
     }
 
+    public function files()
+    {
+        return $this->hasMany('CodeProject\Entities\ProjectFile');
+    }
+
 }
 
