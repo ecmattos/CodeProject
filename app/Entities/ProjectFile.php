@@ -11,7 +11,8 @@ class ProjectFile extends Model implements Transformable
     use TransformableTrait;
 
     protected $fillable = [
-    	'name',
+    	'project_id',
+        'name',
     	'description',
     	'extension'
     ];

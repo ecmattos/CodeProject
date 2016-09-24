@@ -4,16 +4,16 @@ namespace CodeProject\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use CodeProject\Repositories\ProjectMemberRepository;
-use CodeProject\Entities\ProjectMember;
-use CodeProject\Validators\ProjectMemberValidator;
-use CodeProject\Presenters\ProjectMemberPresenter;
+use CodeProject\Repositories\ProjectFileRepository;
+use CodeProject\Entities\ProjectFile;
+use CodeProject\Validators\ProjectFileValidator;
+use CodeProject\Presenters\ProjectFilePresenter;
 
 /**
- * Class ProjectMemberRepositoryEloquent
+ * Class ProjectFileRepositoryEloquent
  * @package namespace CodeProject\Repositories;
  */
-class ProjectMemberRepositoryEloquent extends BaseRepository implements ProjectMemberRepository
+class ProjectFileRepositoryEloquent extends BaseRepository implements ProjectFileRepository
 {
     /**
      * Specify Model class name
@@ -22,7 +22,7 @@ class ProjectMemberRepositoryEloquent extends BaseRepository implements ProjectM
      */
     public function model()
     {
-        return ProjectMember::class;
+        return ProjectFile::class;
     }
 
     /**
@@ -33,7 +33,7 @@ class ProjectMemberRepositoryEloquent extends BaseRepository implements ProjectM
     public function validator()
     {
 
-        return ProjectMemberValidator::class;
+        return ProjectFileValidator::class;
     }
 
     /**
@@ -46,6 +46,6 @@ class ProjectMemberRepositoryEloquent extends BaseRepository implements ProjectM
 
     public function presenter()
     {
-        return ProjectMemberPresenter::class;
+        return ProjectFilePresenter::class;
     }
 }
