@@ -7,13 +7,13 @@ app.config(['$routeProvider', 'OAuthProvider', function($routeProvider, OAuthPro
 	$routeProvider
 		.when('/login',
 		{
-			templateUrl: 'build/views/templates/login.html',
+			templateUrl: 'build/views/login.html',
 			controller: 'LoginController'
 		})
 
 		.when('/home',
 		{
-			templateUrl: 'build/views/templates/home.html',
+			templateUrl: 'build/views/home.html',
 			controller: 'HomeController'
 		})
 
