@@ -6,14 +6,24 @@ angular.module('app.controllers')
 		password: ''
 	};
 
+	$scope.error = {
+		message: '',
+		error: false
+	};
+
 	$scope.login = function()
 	{
-		OAuth.getAccessToken($scope.user).then(function()
+		if($scope.form.$valid)
 		{
-			$location.path('home');
-		}, function()
-		{
-			alert('Login inválido !');
-		});
+			OAuth.getAccessToken($scope.user).then(function()
+			{
+				$location.path('home');
+			}, 
+			function(data)
+			{
+				$scope.error.error = true;
+				$scope.error.message = data.data.error_description;
+			});
+		}
 	};
 }]);
