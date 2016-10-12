@@ -80,8 +80,8 @@
 	<script src="{{ asset('build/js/vendor/angular-oauth2.min.js') }}"></script>
 
 	<script src="{{ asset('build/js/app.js') }}"></script>
-	<script src="{{ asset('build/controllers/login.js') }}"></script>
-	<script src="{{ asset('build/controllers/home.js') }}"></script>
+	<script src="{{ asset('build/js/controllers/login.js') }}"></script>
+	<script src="{{ asset('build/js/controllers/home.js') }}"></script>
 @else
 	<script src="{{ elixir('js/all.js') }}"></script>
 @endif

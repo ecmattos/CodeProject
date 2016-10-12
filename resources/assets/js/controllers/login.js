@@ -1,4 +1,4 @@
-angular.module('app.controller')
+angular.module('app.controllers')
 .controller('LoginController', ['$scope', '$location', 'OAuth', function($scope, $location, OAuth)
 {
 	$scope.user = {

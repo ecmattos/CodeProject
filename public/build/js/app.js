@@ -20,7 +20,7 @@ app.config(['$routeProvider', 'OAuthProvider', function($routeProvider, OAuthPro
 		OAuthProvider.configure(
 		{
       		baseUrl: 'http://localhost:8000',
-      		clientId: 'app',
+      		clientId: 'appid1',
       		clientSecret: 'secret', // optional
       		grantPath: 'oauth/access_token'
     	});
