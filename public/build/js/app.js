@@ -48,6 +48,12 @@ app.config([
 			controller: 'ClientNewController'
 		})
 
+		.when('/clients/:id/edit',
+		{
+			templateUrl: 'build/views/client/edit.html',
+			controller: 'ClientEditController'
+		})
+
 		OAuthProvider.configure(
 		{
       		baseUrl: appConfigProvider.config.baseUrl,
