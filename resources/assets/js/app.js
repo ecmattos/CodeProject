@@ -1,6 +1,7 @@
-var app = angular.module('app',['ngRoute', 'angular-oauth2', 'app.controllers']);
+var app = angular.module('app',['ngRoute', 'angular-oauth2', 'app.controllers', 'app.services']);
 
-angular.module('app.controllers', ['angular-oauth2']);
+angular.module('app.controllers', ['ngMessages', 'angular-oauth2']);
+angular.module('app.services', ['ngResource']);
 
 app.provider('appConfig', function()
 {
@@ -19,8 +20,8 @@ app.provider('appConfig', function()
 });
 
 app.config([
-	'$routeProvider', 'OAuthProvider', 'appConfigProvider', 
-	function($routeProvider, OAuthProvider, appConfigProvider)
+	'$routeProvider', 'OAuthProvider', 'OAuthTokenProvider', 'appConfigProvider', 
+	function($routeProvider, OAuthProvider, OAuthTokenProvider, appConfigProvider)
 {
 	$routeProvider
 		.when('/login',
@@ -35,12 +36,32 @@ app.config([
 			controller: 'HomeController'
 		})
 
+		.when('/clients',
+		{
+			templateUrl: 'build/views/client/list.html',
+			controller: 'ClientListController'
+		})
+
+		.when('/clients/new',
+		{
+			templateUrl: 'build/views/client/new.html',
+			controller: 'ClientNewController'
+		})
+
 		OAuthProvider.configure(
 		{
       		baseUrl: appConfigProvider.config.baseUrl,
       		clientId: 'appid1',
       		clientSecret: 'secret', // optional
       		grantPath: 'oauth/access_token'
+    	});
+
+    	OAuthTokenProvider.configure(
+    	{
+    		name: 'token',
+    		options: {
+    			secure: false
+    		}
     	});
 }]);
 
