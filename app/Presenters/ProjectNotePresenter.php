@@ -9,6 +9,6 @@ class ProjectNotePresenter extends FractalPresenter
 {
 	public function getTransformer()
 	{
-		new ProjectNoteTransformer();
+		return new ProjectNoteTransformer();
 	}
 }

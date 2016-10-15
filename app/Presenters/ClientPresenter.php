@@ -9,6 +9,6 @@ class ClientPresenter extends FractalPresenter
 {
 	public function getTransformer()
 	{
-		new ClientTransformer();
+		return new ClientTransformer();
 	}
 }

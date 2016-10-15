@@ -9,6 +9,6 @@ class ProjectMemberPresenter extends FractalPresenter
 {
 	public function getTransformer()
 	{
-		new ProjectMemberTransformer();
+		return new ProjectMemberTransformer();
 	}
 }
