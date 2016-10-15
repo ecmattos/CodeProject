@@ -1,5 +1,5 @@
 angular.module('app.controllers')
-.controller('ClientListController', ['$scope', 'Client', '$resource', function($scope, Client, $resource)
+.controller('ClientListController', ['$scope', 'Client', function($scope, Client, $resource)
 {
 	$scope.clients = Client.query();
 }]);

@@ -20,11 +20,9 @@ app.provider('appConfig', function()
 });
 
 app.config([
-	'$routeProvider', 'OAuthProvider', 'OAuthTokenProvider', 'appConfigProvider', '$resourceProvider', 
-	function($routeProvider, OAuthProvider, OAuthTokenProvider, appConfigProvider, $resourceProvider)
+	'$routeProvider', 'OAuthProvider', 'OAuthTokenProvider', 'appConfigProvider', 
+	function($routeProvider, OAuthProvider, OAuthTokenProvider, appConfigProvider)
 {
-	$resourceProvider.defaults.stripTrailingSlashes = false;
-
 	$routeProvider
 		.when('/login',
 		{
