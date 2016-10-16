@@ -73,6 +73,12 @@ app.config([
 			controller: 'ClientEditController'
 		})
 
+		.when('/clients/:id/remove',
+		{
+			templateUrl: 'build/views/client/remove.html',
+			controller: 'ClientRemoveController'
+		})
+
 		OAuthProvider.configure(
 		{
       		baseUrl: appConfigProvider.config.baseUrl,
