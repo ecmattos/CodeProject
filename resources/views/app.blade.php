@@ -45,7 +45,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					@if(auth()->guest())
 						@if(!Request::is('auth/login'))
-							<li><a href="{{ url('/auth/login') }}">Login</a></li>
+							<li><a href="{{ url('/#/login') }}">Login</a></li>
 						@endif
 						@if(!Request::is('auth/register'))
 							<li><a href="{{ url('/auth/register') }}">Register</a></li>

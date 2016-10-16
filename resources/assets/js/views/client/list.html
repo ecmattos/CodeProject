@@ -1,17 +1,19 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-12 col-md-offset-0">
 			<div class="panel panel-default">
-				<div class="panel-heading">Listagem de Clientes</div>
+				<div class="panel-heading">
+					Listagem de Clientes
+				</div>
 				<div class="panel-body">
 					<table class="table">
 						<thead>
 							<tr>
-								<th>Name</th>
-								<th>Responsible</th>
-								<th>E-mail</th>
-								<th>Phone</th>
-								<th>Action</th>
+								<th>Names</th>
+								<th>Responsibles</th>
+								<th>E-mails</th>
+								<th>Phones</th>
+								<th>Actions</th>
 							</tr>
 						</thead>
 
@@ -21,7 +23,7 @@
 								<td>{{ o.responsible }}</td>
 								<td>{{ o.email }}</td>
 								<td>{{ o.phone }}</td>
-								<td><a ng-href="#/clients/{{ o.id }}/edit">Editar</a></td>								
+								<td><a ng-href="#/clients/{{ o.id }}/edit">Editar</a> | <a ng-href="#/clients/{{ o.id }}/delete">Excluir</a></td>								
 							</tr>
 						</tbody>
 					</table>
