@@ -1,5 +1,5 @@
 <form class="form-horizontal" name="form" role="form" method="POST" ng-submit="save()">
-	<div class="form-group" ng-class="{ 'has-error': !form.name.$valid && form.name.$touched }">
+	<div class="form-group" ng-class="{'has-error': !form.name.$valid && form.name.$touched}">
 		<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">Name</label>
 		<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 			<input type="text" class="form-control" name="name" ng-model="client.name" required="true">
@@ -9,7 +9,7 @@
 		</div>
 	</div>
 
-	<div class="form-group" ng-class="{ 'has-error': !form.responsible.$valid && form.responsible.$touched }">
+	<div class="form-group" ng-class="{'has-error': !form.responsible.$valid && form.responsible.$touched}">
 		<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">Responsible</label>
 		<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 			<input type="text" class="form-control" name="responsible" ng-model="client.responsible" required="true">
@@ -19,7 +19,7 @@
 		</div>
 	</div>			
 
-	<div class="form-group" ng-class="{ 'has-error': !form.email.$valid && form.email.$touched }">
+	<div class="form-group" ng-class="{'has-error': !form.email.$valid && form.email.$touched}">
 		<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">E-mail</label>
 		<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 			<input type="email" class="form-control" name="email" ng-model="client.email" required="true">
@@ -30,7 +30,7 @@
 		</div>
 	</div>
 				
-	<div class="form-group" ng-class="{ 'has-error': !form.phone.$valid && form.phone.$touched }">
+	<div class="form-group" ng-class="{'has-error': !form.phone.$valid && form.phone.$touched}">
 		<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">Phone</label>
 		<div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
 			<input type="text" class="form-control" name="phone" ng-model="client.phone" required="true">
@@ -40,7 +40,7 @@
 		</div>
 	</div>
 
-	<div class="form-group" ng-class="{ 'has-error': !form.address.$valid && form.address.$touched }">
+	<div class="form-group" ng-class="{'has-error': !form.address.$valid && form.address.$touched}">
 		<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">Address</label>
 		<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 			<input type="text" class="form-control" name="address" ng-model="client.address" required="true">
@@ -53,7 +53,7 @@
 	<div class="form-group">
 		<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">Obs</label>
 		<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-			<textarea name="obs" ng-model="client.obs"></textarea>
+			<textarea class="form-control" name="obs" ng-model="client.obs"></textarea>
 		</div>
 	</div>	
 

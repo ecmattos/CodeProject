@@ -10,7 +10,7 @@
 					</div>
 				
 					<form class="form-horizontal" name="form" role="form" method="POST" ng-submit="login()">
-						<div class="form-group" ng-class="{ 'has-error': !form.username.$valid && form.username.$touched }">
+						<div class="form-group" ng-class="{'has-error': !form.username.$valid && form.username.$touched}">
 							<label class="col-md-4 control-label">E-mail</label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="username" ng-model="user.username" required="true">
@@ -21,7 +21,7 @@
 							</div>
 						</div>
 
-						<div class="form-group" ng-class="{ 'has-error': !form.password.$valid && form.password.$touched }">
+						<div class="form-group" ng-class="{'has-error': !form.password.$valid && form.password.$touched}">
 							<label class="col-md-4 control-label">Senha</label>
 							<div class="col-md-6">
 								<input type="password" class="form-control" name="password" ng-model="user.password" required="true">

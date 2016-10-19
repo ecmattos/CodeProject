@@ -17,7 +17,7 @@ angular.module('app.controllers')
 		{
 			OAuth.getAccessToken($scope.user).then(function()
 			{
-				$location.path('home');
+				$location.path('clients');
 			}, 
 			function(data)
 			{
