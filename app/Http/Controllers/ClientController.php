@@ -72,7 +72,7 @@ class ClientController extends Controller
     {
         try 
         {
-            $this->repository->find($id);
+            return $this->repository->find($id);
         } 
         catch (\Exception $e) 
         {

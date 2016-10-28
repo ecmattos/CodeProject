@@ -18,7 +18,7 @@
 						</thead>
 
 						<tbody>
-							<tr ng-repeat="o in clients">
+							<tr ng-repeat="o in clients | orderBy:'name'">
 								<td>{{ o.name }}</td>
 								<td>{{ o.responsible }}</td>
 								<td>{{ o.email }}</td>

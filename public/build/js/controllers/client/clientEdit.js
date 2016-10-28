@@ -5,6 +5,9 @@ angular.module('app.controllers')
 	{
 		$scope.client = Client.get({id: $routeParams.id});
 
+		console.log($routeParams.id);
+		console.log($scope.client.name);
+
 		$scope.save = function()
 		{
 			if($scope.form.$valid)
