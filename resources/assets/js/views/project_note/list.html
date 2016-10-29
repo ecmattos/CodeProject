@@ -19,7 +19,7 @@
 							<tr ng-repeat="o in projectNotes">
 								<td>{{ o.title }}</td>
 								<td>{{ o.note | limitTo: 75 }} ...</td>
-								<td><a ng-href="#/project/{{ o.project_id }}/note/{{ o.id }}/edit">Editar</a> | <a ng-href="#/project/{{ o.project_id }}/note/{{ o.id }}/remove">Excluir</a></td>		
+								<td><a ng-href="#/project/{{ o.project_id }}/notes/{{ o.id }}/edit">Editar</a> | <a ng-href="#/project/{{ o.project_id }}/notes/{{ o.id }}/remove">Excluir</a></td>		
 							</tr>
 						</tbody>
 					</table>
