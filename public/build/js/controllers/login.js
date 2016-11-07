@@ -1,5 +1,7 @@
 angular.module('app.controllers')
-.controller('LoginController', ['$scope', '$location', 'OAuth', function($scope, $location, OAuth)
+.controller('LoginController', 
+	['$scope', '$location', '$cookies', 'User', 'OAuth', 
+	function($scope, $location, $cookies, User, OAuth)
 {
 	$scope.user = {
 		username: '',
@@ -17,7 +19,11 @@ angular.module('app.controllers')
 		{
 			OAuth.getAccessToken($scope.user).then(function()
 			{
-				$location.path('clients');
+				User.authenticated({}, {}, function(data)
+				{
+					$cookies.putObject('user', data);
+					$location.path('/clients');
+				});
 			}, 
 			function(data)
 			{
