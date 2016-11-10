@@ -1,6 +1,10 @@
-var app = angular.module('app',['ngRoute', 'angular-oauth2', 'app.controllers', 'app.services']);
+var app = angular.module('app',
+[
+	'ngRoute', 'angular-oauth2', 'app.controllers', 'app.services', 'app.filters'
+]);
 
 angular.module('app.controllers', ['ngMessages', 'angular-oauth2']);
+angular.module('app.filters', []);
 angular.module('app.services', ['ngResource']);
 
 app.provider('appConfig', function()
@@ -111,6 +115,31 @@ app.config([
 		})
 
 
+		.when('/projects',
+		{
+			templateUrl: 'build/views/project/list.html',
+			controller: 'ProjectListController'
+		})
+
+		.when('/projects/new',
+		{
+			templateUrl: 'build/views/project/new.html',
+			controller: 'ProjectNewController'
+		})
+
+		.when('/projects/:id/edit',
+		{
+			templateUrl: 'build/views/project/edit.html',
+			controller: 'ProjectEditController'
+		})
+
+		.when('/projects/:id/remove',
+		{
+			templateUrl: 'build/views/project/remove.html',
+			controller: 'ProjectRemoveController'
+		})
+
+		
 		OAuthProvider.configure(
 		{
       		baseUrl: appConfigProvider.config.baseUrl,

@@ -97,10 +97,19 @@
 	<script src="{{ asset('build/js/controllers/project_note/projectNoteEdit.js') }}"></script>
 	<script src="{{ asset('build/js/controllers/project_note/projectNoteRemove.js') }}"></script>
 
+	<script src="{{ asset('build/js/controllers/project/projectList.js') }}"></script>
+	<script src="{{ asset('build/js/controllers/project/projectNew.js') }}"></script>
+	<script src="{{ asset('build/js/controllers/project/projectEdit.js') }}"></script>
+	<script src="{{ asset('build/js/controllers/project/projectRemove.js') }}"></script>
+
+	<!--FILTERS !-->
+	<script src="{{ asset('build/js/filters/dateBR.js') }}"></script>
+	
 	<!--SERVICES !-->
 	<script src="{{ asset('build/js/services/client.js') }}"></script>
 	<script src="{{ asset('build/js/services/projectNote.js') }}"></script>
 	<script src="{{ asset('build/js/services/user.js') }}"></script>
+	<script src="{{ asset('build/js/services/project.js') }}"></script>
 @else
 	<script src="{{ elixir('js/all.js') }}"></script>
 @endif

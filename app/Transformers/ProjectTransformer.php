@@ -12,6 +12,7 @@ class ProjectTransformer extends TransformerAbstract
 		return [
 			'project_id' 	=> $project->id,
 			'project' 		=> $project->name,
+			'client_name' 	=> $project->client->name,
 			'description' 	=> $project->description,
 			'progress' 		=> $project->progress,
 			'status' 		=> $project->status,
