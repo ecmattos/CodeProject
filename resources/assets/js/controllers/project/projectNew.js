@@ -1,6 +1,6 @@
 angular.module('app.controllers')
 .controller('ProjectNewController', 
-	['$scope', '$location', 'Project', 'Client'
+	['$scope', '$location', 'Project', 'Client',
 		function($scope, $location, Project, Client)
 		{
 			$scope.project = new Project();

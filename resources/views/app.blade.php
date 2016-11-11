@@ -67,51 +67,52 @@
 
 	<div ng-view></div>
 
-<!-- Scripts -->
-@if(Config::get('app.debug'))
-	<script src="{{ asset('build/js/vendor/jquery.min.js') }}"></script>
-	<script src="{{ asset('build/js/vendor/angular.min.js') }}"></script>
-	<script src="{{ asset('build/js/vendor/angular-route.min.js') }}"></script>
-	<script src="{{ asset('build/js/vendor/angular-resource.min.js') }}"></script>
-	<script src="{{ asset('build/js/vendor/angular-animate.min.js') }}"></script>
-	<script src="{{ asset('build/js/vendor/angular-messages.min.js') }}"></script>
-	<script src="{{ asset('build/js/vendor/ui-bootstrap.min.js') }}"></script>
-	<script src="{{ asset('build/js/vendor/navbar.min.js') }}"></script>
-	<script src="{{ asset('build/js/vendor/angular-cookies.min.js') }}"></script>
-	<script src="{{ asset('build/js/vendor/query-string.js') }}"></script>
-	<script src="{{ asset('build/js/vendor/angular-oauth2.min.js') }}"></script>
+	<!-- Scripts -->
+	@if(Config::get('app.debug'))
+		<script src="{{ asset('build/js/vendor/jquery.min.js') }}"></script>
+		<script src="{{ asset('build/js/vendor/angular.min.js') }}"></script>
+		<script src="{{ asset('build/js/vendor/angular-route.min.js') }}"></script>
+		<script src="{{ asset('build/js/vendor/angular-resource.min.js') }}"></script>
+		<script src="{{ asset('build/js/vendor/angular-animate.min.js') }}"></script>
+		<script src="{{ asset('build/js/vendor/angular-messages.min.js') }}"></script>
+		<script src="{{ asset('build/js/vendor/ui-bootstrap.min.js') }}"></script>
+		<script src="{{ asset('build/js/vendor/navbar.min.js') }}"></script>
+		<script src="{{ asset('build/js/vendor/angular-cookies.min.js') }}"></script>
+		<script src="{{ asset('build/js/vendor/query-string.js') }}"></script>
+		<script src="{{ asset('build/js/vendor/angular-oauth2.min.js') }}"></script>
 
-	<script src="{{ asset('build/js/app.js') }}"></script>
-	<!--CONTROLLERS !-->
-	<script src="{{ asset('build/js/controllers/login.js') }}"></script>
-	<script src="{{ asset('build/js/controllers/home.js') }}"></script>
-	
-	<script src="{{ asset('build/js/controllers/client/clientList.js') }}"></script>
-	<script src="{{ asset('build/js/controllers/client/clientNew.js') }}"></script>
-	<script src="{{ asset('build/js/controllers/client/clientEdit.js') }}"></script>
-	<script src="{{ asset('build/js/controllers/client/clientRemove.js') }}"></script>
+		<script src="{{ asset('build/js/app.js') }}"></script>
+		
+		<!--CONTROLLERS !-->
+		<script src="{{ asset('build/js/controllers/login.js') }}"></script>
+		<script src="{{ asset('build/js/controllers/home.js') }}"></script>
+		
+		<script src="{{ asset('build/js/controllers/client/clientList.js') }}"></script>
+		<script src="{{ asset('build/js/controllers/client/clientNew.js') }}"></script>
+		<script src="{{ asset('build/js/controllers/client/clientEdit.js') }}"></script>
+		<script src="{{ asset('build/js/controllers/client/clientRemove.js') }}"></script>
 
-	<script src="{{ asset('build/js/controllers/project_note/projectNoteList.js') }}"></script>
-	<script src="{{ asset('build/js/controllers/project_note/projectNoteShow.js') }}"></script>
-	<script src="{{ asset('build/js/controllers/project_note/projectNoteNew.js') }}"></script>
-	<script src="{{ asset('build/js/controllers/project_note/projectNoteEdit.js') }}"></script>
-	<script src="{{ asset('build/js/controllers/project_note/projectNoteRemove.js') }}"></script>
+		<script src="{{ asset('build/js/controllers/project_note/projectNoteList.js') }}"></script>
+		<script src="{{ asset('build/js/controllers/project_note/projectNoteShow.js') }}"></script>
+		<script src="{{ asset('build/js/controllers/project_note/projectNoteNew.js') }}"></script>
+		<script src="{{ asset('build/js/controllers/project_note/projectNoteEdit.js') }}"></script>
+		<script src="{{ asset('build/js/controllers/project_note/projectNoteRemove.js') }}"></script>
 
-	<script src="{{ asset('build/js/controllers/project/projectList.js') }}"></script>
-	<script src="{{ asset('build/js/controllers/project/projectNew.js') }}"></script>
-	<script src="{{ asset('build/js/controllers/project/projectEdit.js') }}"></script>
-	<script src="{{ asset('build/js/controllers/project/projectRemove.js') }}"></script>
+		<script src="{{ asset('build/js/controllers/project/projectList.js') }}"></script>
+		<script src="{{ asset('build/js/controllers/project/projectNew.js') }}"></script>
+		<script src="{{ asset('build/js/controllers/project/projectEdit.js') }}"></script>
+		<script src="{{ asset('build/js/controllers/project/projectRemove.js') }}"></script>
 
-	<!--FILTERS !-->
-	<script src="{{ asset('build/js/filters/dateBR.js') }}"></script>
-	
-	<!--SERVICES !-->
-	<script src="{{ asset('build/js/services/client.js') }}"></script>
-	<script src="{{ asset('build/js/services/projectNote.js') }}"></script>
-	<script src="{{ asset('build/js/services/user.js') }}"></script>
-	<script src="{{ asset('build/js/services/project.js') }}"></script>
-@else
-	<script src="{{ elixir('js/all.js') }}"></script>
-@endif
+		<!--FILTERS !-->
+		<script src="{{ asset('build/js/filters/dateBR.js') }}"></script>
+		
+		<!--SERVICES !-->
+		<script src="{{ asset('build/js/services/client.js') }}"></script>
+		<script src="{{ asset('build/js/services/projectNote.js') }}"></script>
+		<script src="{{ asset('build/js/services/user.js') }}"></script>
+		<script src="{{ asset('build/js/services/project.js') }}"></script>
+	@else
+		<script src="{{ elixir('js/all.js') }}"></script>
+	@endif
 </body>
 </html>
