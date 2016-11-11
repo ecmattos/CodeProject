@@ -10,7 +10,14 @@ angular.module('app.services', ['ngResource']);
 app.provider('appConfig', function()
 {
 	var config = {
-		baseUrl: "http://localhost:8000"
+		baseUrl: "http://localhost:8000",
+		project: {
+			status: [
+				{value: 1, label: 'Não iniciado'},
+				{value: 2, label: 'Iniciado'},
+				{value: 3, label: 'Concluído'}
+			]
+		}
 	};
 
 	return {
@@ -27,6 +34,9 @@ app.config([
 	'$routeProvider', '$httpProvider', 'OAuthProvider', 'OAuthTokenProvider', 'appConfigProvider', 
 	function($routeProvider, $httpProvider, OAuthProvider, OAuthTokenProvider, appConfigProvider)
 {
+	$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencode;charset=utf-8';
+	$httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencode;charset=utf-8';
+	
 	$httpProvider.defaults.transformResponse = function(data, headers)
 	{
 		var heardersGetter = headers();
