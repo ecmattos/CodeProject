@@ -50,6 +50,7 @@ class ProjectController extends Controller
         try
         {
             $input = $request->all();
+           
             $this->service->create($input);
         }
         catch (ValidatorException $e)

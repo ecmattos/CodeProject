@@ -9,14 +9,38 @@ angular.module('app.services', ['ngResource']);
 
 app.provider('appConfig', function()
 {
-	var config = {
+	var config = 
+	{
 		baseUrl: "http://localhost:8000",
-		project: {
-			status: [
+		
+		project: 
+		{
+			status: 
+			[
 				{value: 1, label: 'Não iniciado'},
 				{value: 2, label: 'Iniciado'},
 				{value: 3, label: 'Concluído'}
 			]
+		},
+
+		utils:
+		{
+			transformResponse: function(data, headers)
+			{
+				var heardersGetter = headers();
+
+				if((heardersGetter['content-type'] == 'application/json') || (heardersGetter['content-type'] == 'text/json'))
+				{
+					var dataJson = JSON.parse(data);
+
+					if(dataJson.hasOwnProperty('data'))
+					{						
+						dataJson = dataJson.data;
+					}
+					return dataJson;
+				}
+				return data;
+			}
 		}
 	};
 
@@ -37,24 +61,7 @@ app.config([
 	$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencode;charset=utf-8';
 	$httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencode;charset=utf-8';
 	
-	$httpProvider.defaults.transformResponse = function(data, headers)
-	{
-		var heardersGetter = headers();
-
-		if((heardersGetter['content-type'] == 'application/json') || (heardersGetter['content-type'] == 'text/json'))
-		{
-			var dataJson = JSON.parse(data);
-
-			if(dataJson.hasOwnProperty('data'))
-			{
-				
-				dataJson = dataJson.data;
-			}
-			return dataJson;
-		}
-		return data;
-		
-	} 
+	$httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
 	
 	$routeProvider
 		.when('/login',
