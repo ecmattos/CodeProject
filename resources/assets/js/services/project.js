@@ -6,9 +6,11 @@ angular.module('app.services')
 			{
 				if(angular.isObject(data) && data.hasOwnProperty('due_date'))
 				{
-					data.due_date = $filter('date')(data.due_date, 'yyyy-MM-dd');
+					var o = angular.copy(data);
+
+					o.due_date = $filter('date')(data.due_date, 'yyyy-MM-dd');
 							
-					return $httpParamSerializer(data);
+					return appConfig.utils.transformRequest(o);
 				}
 				return data;
 			};
@@ -34,7 +36,10 @@ angular.module('app.services')
 						if(angular.isObject(o) && o.hasOwnProperty('due_date'))
 						{
 							var arrayDate = o.due_date.split('-');
-							o.due_date = new Date(arrayDate[0], arrayDate[1], arrayDate[2]);
+
+							month = parseInt(arrayDate[1])-1;
+
+							o.due_date = new Date(arrayDate[0], month, arrayDate[2]);
 						}
 						return o;
 					}
