@@ -6,7 +6,9 @@ var app = angular.module('app',
 	'app.services', 
 	'app.filters', 
 	'ui.bootstrap.typeahead', 
+	'ui.bootstrap.datepicker',
 	'ui.bootstrap.tpls'
+
 ]);
 
 angular.module('app.controllers', ['ngMessages', 'angular-oauth2']);
