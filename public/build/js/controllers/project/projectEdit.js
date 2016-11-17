@@ -16,6 +16,8 @@ angular.module('app.controllers')
 				
 				$scope.save = function()
 				{
+					console.log($scope.project);
+
 					if($scope.form.$valid)
 					{
 						$scope.project.owner_id = $cookies.getObject('user').id;
@@ -44,7 +46,7 @@ angular.module('app.controllers')
 						}).$promise;
 				};
 
-				$scope.selectClient= function($item)
+				$scope.selectClient = function($item)
 				{
 					$scope.project.client_id = $item.id;
 				};
