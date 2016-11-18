@@ -39,7 +39,7 @@ angular.module('app.controllers')
 
 				$scope.selectClient= function($item)
 				{
-					$scope.project.client_id = $item.id;
+					$scope.project.client_id = $item.client_id;
 				};
 			}
 		]
