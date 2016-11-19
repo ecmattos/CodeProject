@@ -46,9 +46,15 @@
 						<div class="form-group" ng-class="{'has-error': !form.due_date.$valid && form.due_date.$touched}">
 							<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">Due date</label>
 							<div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">	
-								<input type="date" class="form-control" name="due_date" ng-model="project.due_date" ng-required="true">
+								<p class="input-group">
+          							<input type="text" class="form-control" name="due_date" datepicker-popup="dd/MM/yyyy" ng-model="project.due_date" is-open="due_date.status.opened"  ng-required="true" close-text="Close"  />
+          							<span class="input-group-btn">
+            							<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+          							</span>
+        						</p>
 								<div ng-messages="form.due_date.$error" class="help-block" ng-show="form.due_date.$touched">
 									<div ng-message="required"><h6>Campo obrigatório</h6></div>
+									<div ng-message="date"><h6>Formato inválido</h6></div>
 								</div>
 							</div>
 						</div>

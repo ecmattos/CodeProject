@@ -7,7 +7,8 @@ var app = angular.module('app',
 	'app.filters', 
 	'ui.bootstrap.typeahead', 
 	'ui.bootstrap.datepicker',
-	'ui.bootstrap.tpls'
+	'ui.bootstrap.tpls',
+	'ngFileUpload'
 
 ]);
 
