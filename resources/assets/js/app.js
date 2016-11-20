@@ -34,6 +34,12 @@ app.provider('appConfig',
 					]
 				},
 
+				urls:
+				{
+					projectFile: 
+						'/project/{{id}}/file/{{idFile}}'
+				},
+
 				utils:
 				{
 					transformRequest: function(data)

@@ -31,7 +31,7 @@ class ProjectService
 		{
 			return 
 			[
-				'error' => true;
+				'error' => true,
 				'message' => $e->getMessageBag()
 			];
 		}
@@ -48,7 +48,7 @@ class ProjectService
 		{
 			return 
 			[
-				'error' => true;
+				'error' => true,
 				'message' => $e->getMessageBag()
 			];
 		}

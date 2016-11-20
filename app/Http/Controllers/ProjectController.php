@@ -62,7 +62,10 @@ class ProjectController extends Controller
     {
         if($this->service->checkProjectPermissions($id) == false)
         {
-            return ['error' => 'Access Denied'];
+            return 
+            [
+                'error' => 'Access Denied'
+            ];
         }
 
         return $this->repository->find($id);
@@ -90,7 +93,10 @@ class ProjectController extends Controller
     {
         if($this->service->checkProjectOwner($id) == false)
         {
-            return ['error' => 'Access Denied'];
+            return 
+            [
+                'error' => 'Access Denied'
+            ];
         }
 
         $input = $request->all();
@@ -107,7 +113,10 @@ class ProjectController extends Controller
     {
         if($this->service->checkProjectPermissions($id) == false)
         {
-            return ['error' => 'Access Denied'];
+            return 
+            [
+                'error' => 'Access Denied'
+            ];
         }
 
         $this->repository->delete($id);

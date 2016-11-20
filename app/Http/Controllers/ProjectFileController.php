@@ -22,7 +22,7 @@ class ProjectFileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         return $this->repository->findWhere(['project_id' => $id]);
     }
@@ -61,39 +61,30 @@ class ProjectFileController extends Controller
     {
         if ($this->service->checkProjectPermissions($id) == false)
         {
-            return 
-            [
-                'error' => 'Access Denied';
-            ];
-
-            return response()->download($this->service->getFilePath($id));
+            return ['error' => 'Access Forbidden'];
         }
+
+        return response()->download($this->service->getFilePath($id));
     }
 
     public function show($id)
     {
         if ($this->service->checkProjectPermissions($id) == false)
         {
-            return 
-            [
-                'error' => 'Access Denied';
-            ];
-
-            return $this->repository->find($id);
+            return ['error' => 'Access Forbidden'];
         }
+
+        return $this->repository->find($id);
     }
 
     public function update($id)
     {
         if ($this->service->checkProjectOwner($id) == false)
         {
-            return 
-            [
-                'error' => 'Access Denied';
-            ];
-
-            return $this->service->update($data, $id);
+            return ['error' => 'Access Forbidden'];
         }
+
+        return $this->service->update($data, $id);
     }
 
     /**
@@ -106,12 +97,9 @@ class ProjectFileController extends Controller
     {
         if ($this->service->checkProjectOwner($id) == false)
         {
-            return 
-            [
-                'error' => 'Access Denied';
-            ];
-
-            return $this->service->update($data, $id);
+            return ['error' => 'Access Forbidden'];
         }
+
+        return $this->service->update($data, $id);
     }
 }

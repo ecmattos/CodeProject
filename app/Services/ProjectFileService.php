@@ -2,6 +2,7 @@
 
 namespace CodeProject\Services;
 
+use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Repositories\ProjectFileRepository;
 use CodeProject\Validators\ProjectFileValidator;
 

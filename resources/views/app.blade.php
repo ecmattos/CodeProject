@@ -99,6 +99,11 @@
 		<script src="{{ asset('build/js/controllers/project_note/projectNoteEdit.js') }}"></script>
 		<script src="{{ asset('build/js/controllers/project_note/projectNoteRemove.js') }}"></script>
 
+		<script src="{{ asset('build/js/controllers/project_file/projectFileList.js') }}"></script>
+		<script src="{{ asset('build/js/controllers/project_file/projectFileNew.js') }}"></script>
+		<script src="{{ asset('build/js/controllers/project_file/projectFileEdit.js') }}"></script>
+		<script src="{{ asset('build/js/controllers/project_file/projectFileRemove.js') }}"></script>
+
 		<script src="{{ asset('build/js/controllers/project/projectList.js') }}"></script>
 		<script src="{{ asset('build/js/controllers/project/projectNew.js') }}"></script>
 		<script src="{{ asset('build/js/controllers/project/projectEdit.js') }}"></script>
@@ -108,8 +113,10 @@
 		<script src="{{ asset('build/js/filters/dateBR.js') }}"></script>
 		
 		<!--SERVICES !-->
+		<script src="{{ asset('build/js/services/url.js') }}"></script>
 		<script src="{{ asset('build/js/services/client.js') }}"></script>
 		<script src="{{ asset('build/js/services/projectNote.js') }}"></script>
+		<script src="{{ asset('build/js/services/projectFile.js') }}"></script>
 		<script src="{{ asset('build/js/services/user.js') }}"></script>
 		<script src="{{ asset('build/js/services/project.js') }}"></script>
 	@else
