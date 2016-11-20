@@ -2,7 +2,7 @@
 
 namespace CodeProject\Services;
 
-use Prettus\Validator\Contracts\ValidatorInterface;
+#use Prettus\Validator\Contracts\ValidatorInterface;
 use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Validators\ProjectValidator;
 
@@ -22,16 +22,62 @@ class ProjectService
 
 	public function create(array $data)
 	{
-		$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-		return $this->repository->create($data);
+		try 
+		{
+			$this->validator->with($data)->passesOrFail();
+			return $this->repository->create($data);
+		} 
+		catch (ValidatorException $e) 
+		{
+			return 
+			[
+				'error' => true;
+				'message' => $e->getMessageBag()
+			];
+		}
 	}
 
 	public function update($id, array $data)
 	{
-		$this->validator->setId($id); //funcao q set id para regra do update
-		$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
-		return $this->repository->update($data, $id);
+		try 
+		{
+			$this->validator->with($data)->passesOrFail();
+			return $this->repository->update($data, $id);
+		} 
+		catch (ValidatorException $e) 
+		{
+			return 
+			[
+				'error' => true;
+				'message' => $e->getMessageBag()
+			];
+		}
 	}
+
+	public function checkProjectOwner($projectId)
+    {
+        $userId = \Authorizer::getResourceOwnerId();
+
+        return $this->repository->isOwner($projectId, $userId);
+    }
+
+    public function checkProjectMember($projectId)
+    {
+        $userId = \Authorizer::getResourceOwnerId();
+
+        return $this->repository->hasMember($projectId, $userId);
+    }
+
+    public function checkProjectPermissions($projectId)
+    {
+        if ($this->checkProjectOwner($projectId) or $this->checkProjectMember($projectId))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
 
 	public function addMember(array $data)
 	{

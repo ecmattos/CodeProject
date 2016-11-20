@@ -1,0 +1,40 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Edição de Nota de Projeto
+				</div>
+				<div class="panel-body">
+					<form class="form-horizontal" name="form" role="form" method="PUT" ng-submit="save()">
+						<div class="form-group" ng-class="{'has-error': !form.title.$valid && form.title.$touched}">
+							<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">Title</label>
+							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">	
+								<input type="text" class="form-control" name="title" ng-model="projectNote.title" required="true">
+								<div ng-messages="form.title.$error" class="help-block" ng-show="form.title.$touched">
+									<div ng-message="required"><h6>Campo obrigatório</h6></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group" ng-class="{'has-error': !form.note.$valid && form.note.$touched}">
+							<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">Note</label>
+							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+								<textarea class="form-control" name="note" ng-model="projectNote.note" required="true"></textarea>
+								<div ng-messages="form.note.$error" class="help-block" ng-show="form.note.$touched">
+									<div ng-message="required"><h6>Campo obrigatório</h6></div>
+								</div>
+							</div>
+						</div>	
+
+						<div class="form-group">
+							<div class="col-md-2 col-md-offset-5">
+								<button type="submit" class="btn btn-primary">Salvar</button>
+							</div>
+						</div>
+					</form>
+				</div>				
+			</div>
+		</div>
+	</div>
+</div>

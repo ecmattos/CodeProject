@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use CodeProject\Repositories\ProjectFileRepository;
 use CodeProject\Services\ProjectFileService;
 
-use Prettus\Validator\Exceptions\ValidatorException;
-
 class ProjectFileController extends Controller
 {
     private $repository;
@@ -26,6 +24,7 @@ class ProjectFileController extends Controller
      */
     public function index()
     {
+        return $this->repository->findWhere(['project_id' => $id]);
     }
 
     /**\CodeProject\Http\Middleware\VerifyCsrfToken::class,
@@ -58,7 +57,45 @@ class ProjectFileController extends Controller
         $this->service->create($data);
     }
 
-    
+    public function showFile($id)
+    {
+        if ($this->service->checkProjectPermissions($id) == false)
+        {
+            return 
+            [
+                'error' => 'Access Denied';
+            ];
+
+            return response()->download($this->service->getFilePath($id));
+        }
+    }
+
+    public function show($id)
+    {
+        if ($this->service->checkProjectPermissions($id) == false)
+        {
+            return 
+            [
+                'error' => 'Access Denied';
+            ];
+
+            return $this->repository->find($id);
+        }
+    }
+
+    public function update($id)
+    {
+        if ($this->service->checkProjectOwner($id) == false)
+        {
+            return 
+            [
+                'error' => 'Access Denied';
+            ];
+
+            return $this->service->update($data, $id);
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -67,35 +104,14 @@ class ProjectFileController extends Controller
      */
     public function destroy($id, $fileId)
     {
-        try 
+        if ($this->service->checkProjectOwner($id) == false)
         {
-            $file = $this->repository->find($fileId);
-            
-            $this->service->destroy($fileId, $file->extension);
+            return 
+            [
+                'error' => 'Access Denied';
+            ];
 
-            $this->repository->delete($fileId);
-            
-            return 
-            [
-                'success' => true, 
-                'messsage' => 'Documento excluído com sucesso !'
-            ];
-        } 
-        catch (ModelNotFoundException $e) 
-        {
-            return 
-            [
-                'error' => true, 
-                'message' => 'Opss... Não encontramos o Documento informado.'
-            ];
-        }
-        catch (\Exception $e) 
-        {
-            return 
-            [
-                'error' => true, 
-                'message' => 'Opss... Houve algum problema e não foi possível excluir o Documento desejado.'
-            ];
+            return $this->service->update($data, $id);
         }
     }
 }

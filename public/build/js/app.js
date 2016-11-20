@@ -156,6 +156,31 @@ app.config([
 			})
 
 
+			.when('/project/:id/files',
+			{
+				templateUrl: 'build/views/project_file/list.html',
+				controller: 'ProjectFileListController'
+			})
+
+			.when('/project/:id/files/new',
+			{
+				templateUrl: 'build/views/project_file/new.html',
+				controller: 'ProjectFileNewController'
+			})
+
+			.when('/project/:id/files/:idFile/edit',
+			{
+				templateUrl: 'build/views/project_file/edit.html',
+				controller: 'ProjectFileEditController'
+			})
+
+			.when('/project/:id/files/:idFile/remove',
+			{
+				templateUrl: 'build/views/project_file/remove.html',
+				controller: 'ProjectFileRemoveController'
+			})
+
+
 			.when('/projects',
 			{
 				templateUrl: 'build/views/project/list.html',

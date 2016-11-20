@@ -47,20 +47,9 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        try
-        {
-            $input = $request->all();
+        $input = $request->all();
            
-            $this->service->create($input);
-        }
-        catch (ValidatorException $e)
-        {
-            return 
-            [
-                'error' => true,
-                'message' => $e->getMessageBag()
-            ];
-        }
+        return $this->service->create($input);
     }
 
     /**
@@ -71,7 +60,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        if($this->checkProjectPermissions($id) == false)
+        if($this->service->checkProjectPermissions($id) == false)
         {
             return ['error' => 'Access Denied'];
         }
@@ -99,24 +88,13 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if($this->checkProjectOwner($id) == false)
+        if($this->service->checkProjectOwner($id) == false)
         {
             return ['error' => 'Access Denied'];
         }
 
-        try
-        {
-            $input = $request->all();
-            $this->service->update($id, $input);
-        }
-        catch (ValidatorException $e)
-        {
-            return 
-            [
-                'error' => true,
-                'message' => $e->getMessageBag()
-            ];
-        }
+        $input = $request->all();
+        $this->service->update($input, $id);
     }
 
     /**
@@ -127,60 +105,11 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        if($this->checkProjectPermissions($id) == false)
+        if($this->service->checkProjectPermissions($id) == false)
         {
             return ['error' => 'Access Denied'];
         }
 
-        try 
-        {
-            $this->repository->delete($id);
-            return 
-            [
-                'success' => true, 
-                'messsage' => 'Projeto excluído com sucesso !'
-            ];
-        } 
-        catch (ModelNotFoundException $e) 
-        {
-            return 
-            [
-                'error' => true, 
-                'message' => 'Opss... Não encontramos o Projeto informado.'
-            ];
-        }
-
-        catch (\Exception $e) 
-        {
-            return 
-            [
-                'error' => true, 
-                'message' => 'Opss... Houve algum problema e não foi possível excluir o Projeto desejado.'
-            ];
-        }
-    }
-
-    private function checkProjectOwner($projectId)
-    {
-        $userId = \Authorizer::getResourceOwnerId();
-
-        return $this->repository->isOwner($projectId, $userId);
-    }
- 
-    private function checkProjectMember($projectId)
-    {
-        $userId = \Authorizer::getResourceOwnerId();
-
-        return $this->repository->hasMember($projectId, $userId);
-    }
-
-    private function checkProjectPermissions($projectId)
-    {
-        if ($this->checkProjectOwner($projectId) or $this->checkProjectMember($projectId))
-        {
-            return true;
-        }
-
-        return false;
+        $this->repository->delete($id);
     }
 }
