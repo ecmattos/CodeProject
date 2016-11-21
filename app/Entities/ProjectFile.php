@@ -22,5 +22,10 @@ class ProjectFile extends Model implements Transformable
 		return $this->belongsTo('CodeProject\Entities\Project'); 
 	}
 
+    public function getFileName()
+    {
+        return $this->id . '.' . $this->extension;
+    }
+
 }
 
