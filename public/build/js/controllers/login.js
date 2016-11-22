@@ -22,7 +22,7 @@ angular.module('app.controllers')
 				User.authenticated({}, {}, function(data)
 				{
 					$cookies.putObject('user', data);
-					$location.path('/home');
+					$location.path('/projects');
 				});
 			}, 
 			function(data)

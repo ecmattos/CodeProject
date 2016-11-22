@@ -8,6 +8,7 @@ var app = angular.module('app',
 	'app.directives',
 	'ui.bootstrap.typeahead', 
 	'ui.bootstrap.datepicker',
+	'ui.bootstrap.progressbar',
 	'ui.bootstrap.tpls',
 	'ngFileUpload'
 
