@@ -4,7 +4,6 @@ angular.module('app.controllers')
 	function($scope, $routeParams, Project, appConfig)
 	{
 		$scope.projects = Project.query();
-		$scope.status = appConfig.project.status;
-		console.log($scope.status);
+		$scope.status = appConfig.project.status
 	}
 ]);

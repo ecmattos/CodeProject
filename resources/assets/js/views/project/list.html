@@ -13,7 +13,6 @@
 								<th>Name</th>
 								<th>Client</th>
 								<th>Progress (%)</th>
-								<th>Status</th>
 								<th>Due date</th>
 								<th>#</th>
 							</tr>
@@ -25,9 +24,9 @@
 								<td>{{ o.name }}</td>
 								<td>{{ o.client_name }}</td>
 								<td>
+									{{ status[o.status-1].label }}
 									<progressbar class="progress-striped" animate="true" max="100" value="o.progress" type="success">{{ o.progress }}</progressbar>
 								</td>
-								<td>{{ status[status.value].label }} </td>
 								<td>{{ o.due_date | dateBR }}</td>
 								<td><a ng-href="#/projects/{{ o.id }}/remove" rel="tooltip" title="Excluir"><i class="glyphicon glyphicon-trash"></i></a></td>
 							</tr>
