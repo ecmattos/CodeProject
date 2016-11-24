@@ -27,9 +27,9 @@
 								<td>
 									<progressbar class="progress-striped" animate="true" max="100" value="o.progress" type="success">{{ o.progress }}</progressbar>
 								</td>
-								<td>{{ o.status }}</td>
+								<td>{{ status[status.value].label }} </td>
 								<td>{{ o.due_date | dateBR }}</td>
-								<td><a ng-href="#/projects/{{ o.id }}/remove" rel="tooltip" title="Excluir"><i class="glyphicon glyphicon-trash"></i></a></td>		
+								<td><a ng-href="#/projects/{{ o.id }}/remove" rel="tooltip" title="Excluir"><i class="glyphicon glyphicon-trash"></i></a></td>
 							</tr>
 						</tbody>
 					</table>
