@@ -1,12 +1,12 @@
 var app = angular.module('app',
 [
-	'ngRoute', 
-	'angular-oauth2', 
-	'app.controllers', 
-	'app.services', 
-	'app.filters', 
+	'ngRoute',
+	'angular-oauth2',
+	'app.controllers',
+	'app.services',
+	'app.filters',
 	'app.directives',
-	'ui.bootstrap.typeahead', 
+	'ui.bootstrap.typeahead',
 	'ui.bootstrap.datepicker',
 	'ui.bootstrap.progressbar',
 	'ui.bootstrap.tpls',
@@ -19,17 +19,17 @@ angular.module('app.filters', []);
 angular.module('app.directives', []);
 angular.module('app.services', ['ngResource']);
 
-app.provider('appConfig', 
+app.provider('appConfig',
 	['$httpParamSerializerProvider',
 		function($httpParamSerializerProvider)
 		{
-			var config = 
+			var config =
 			{
 				baseUrl: "http://localhost:8000",
-				
-				project: 
+
+				project:
 				{
-					status: 
+					status:
 					[
 						{value: 1, label: 'Não iniciado'},
 						{value: 2, label: 'Iniciado'},
@@ -39,7 +39,7 @@ app.provider('appConfig',
 
 				urls:
 				{
-					projectFile: 
+					projectFile:
 						'/project/{{id}}/file/{{idFile}}'
 				},
 
@@ -52,7 +52,7 @@ app.provider('appConfig',
 							return $httpParamSerializerProvider.$get()(data);
 						}
 
-						return data;	
+						return data;
 					},
 
 					transformResponse: function(data, headers)
@@ -64,7 +64,7 @@ app.provider('appConfig',
 							var dataJson = JSON.parse(data);
 
 							if(dataJson.hasOwnProperty('data'))
-							{						
+							{
 								dataJson = dataJson.data;
 							}
 							return dataJson;
@@ -75,7 +75,7 @@ app.provider('appConfig',
 			};
 
 			return {
-				
+
 				config: config,
 				$get: function()
 				{
@@ -86,16 +86,16 @@ app.provider('appConfig',
 	]);
 
 app.config([
-	'$routeProvider', '$httpProvider', 'OAuthProvider', 'OAuthTokenProvider', 'appConfigProvider', 
+	'$routeProvider', '$httpProvider', 'OAuthProvider', 'OAuthTokenProvider', 'appConfigProvider',
 	function($routeProvider, $httpProvider, OAuthProvider, OAuthTokenProvider, appConfigProvider)
 	{
 		$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 		$httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-		
+
 		$httpProvider.defaults.transformRequest = appConfigProvider.config.utils.transformRequest;
-		
+
 		$httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
-		
+
 		$routeProvider
 			.when('/login',
 			{
@@ -214,7 +214,7 @@ app.config([
 				controller: 'ProjectRemoveController'
 			})
 
-			
+
 			OAuthProvider.configure(
 			{
 	      		baseUrl: appConfigProvider.config.baseUrl,
@@ -249,5 +249,3 @@ app.run(['$rootScope', '$window', 'OAuth', function($rootScope, $window, OAuth) 
       return $window.location.href = '/login?error_reason=' + rejection.data.error;
     });
 }]);
-
-
