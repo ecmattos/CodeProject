@@ -3,7 +3,7 @@ angular.module('app.controllers')
         ['$scope', '$location', '$routeParams', 'ProjectFile',
             function($scope, $location, $routeParams, ProjectFile){
                 $scope.projectFile = ProjectFile.get({
-                    //id: $routeParams.id,
+                    id: $routeParams.id,
                     idFile: $routeParams.idFile
                 });
 

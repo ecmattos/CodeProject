@@ -2,6 +2,8 @@
 
 namespace CodeProject\Services;
 
+use Prettus\Validator\Contracts\ValidatorInterface;
+
 use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Repositories\ProjectFileRepository;
 use CodeProject\Validators\ProjectFileValidator;
@@ -32,7 +34,7 @@ class ProjectFileService
 	{
 		try 
 		{
-			$this->validator->with($data)->passesOrFail();
+			$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
 			$project = $this->projectRepository->skipPresenter()->find($data['project_id']);
 			$projectFile = $project->files()->create($data);
@@ -52,23 +54,21 @@ class ProjectFileService
 		}
 	}
 
-	public function update(array $data)
-	{
-		try 
-		{
-			$this->validator->with($data)->passesOrFail();
-
-			return $this->repository->update($data, $id);
-		} 
-		catch (ValidatorException $e)
-		{
-			return
-			[
-				'error' => true,
-				'message' => $e->getMessageBag()
-			];
-		}
-	}
+	public function update(array $data, $id)
+    {
+        try 
+        {
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            return $this->repository->update($data, $id);
+        } 
+        catch (ValidatorException $e) 
+        {
+            return [
+                'error' => true,
+                'message' => $e->getMessageBag()
+            ];
+        }
+    }
 
 	public function getFilePath($id)
 	{
@@ -121,7 +121,7 @@ class ProjectFileService
 
 	public function delete($id)
 	{
-		$projectFileId = $this->repository->skipPresenter()->find($id);
+		$projectFile = $this->repository->skipPresenter()->find($id);
 
 		if ($this->storage->exists($projectFile->getFileName()))
 		{

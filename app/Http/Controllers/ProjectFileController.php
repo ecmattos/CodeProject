@@ -5,16 +5,19 @@ namespace CodeProject\Http\Controllers;
 use Illuminate\Http\Request;
 use CodeProject\Repositories\ProjectFileRepository;
 use CodeProject\Services\ProjectFileService;
+use CodeProject\Services\ProjectService;
 
 class ProjectFileController extends Controller
 {
     private $repository;
     private $service;
+    private $projectService;
 
-    public function __construct(ProjectFileRepository $repository, ProjectFileService $service)
+    public function __construct(ProjectFileRepository $repository, ProjectFileService $service, ProjectService $projectService)
     {
         $this->repository = $repository;
         $this->service = $service;
+        $this->projectService = $projectService;
     }
 
     /**
@@ -75,24 +78,28 @@ class ProjectFileController extends Controller
         ];
     }
 
-    public function show($id)
+    public function show($projectId, $fileId)
     {
-        if ($this->service->checkProjectPermissions($id) == false)
-        {
-            return ['error' => 'Access Forbidden'];
-        }
+        #if ($this->service->checkProjectPermissions($id) == false)
+        #{
+        #    return ['error' => 'Access Forbidden'];
+        #}
 
-        return $this->repository->find($id);
+        return $this->repository->find($fileId);
     }
 
-    public function update($id)
+    public function update(Request $request, $id, $idFile)
     {
-        if ($this->service->checkProjectOwner($id) == false)
+        $data = $request->all();
+        
+        $data['project_id'] = $id;
+        
+        if ($this->projectService->checkProjectPermissions($id) == false) 
         {
             return ['error' => 'Access Forbidden'];
         }
-
-        return $this->service->update($data, $id);
+        
+        return $this->service->update($data, $idFile);
     }
 
     /**
@@ -101,13 +108,13 @@ class ProjectFileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, $fileId)
+    public function destroy($id)
     {
         if ($this->service->checkProjectOwner($id) == false)
         {
             return ['error' => 'Access Forbidden'];
         }
 
-        return $this->service->update($data, $id);
+        $this->service->delete($id);
     }
 }

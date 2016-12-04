@@ -14,6 +14,7 @@
 								<th>Client</th>
 								<th>Progress (%)</th>
 								<th>Due date</th>
+								<th>Files</th>
 								<th>#</th>
 							</tr>
 						</thead>
@@ -28,6 +29,7 @@
 									<progressbar class="progress-striped" animate="true" max="100" value="o.progress" type="success">{{ o.progress }}</progressbar>
 								</td>
 								<td>{{ o.due_date | dateBR }}</td>
+								<td><a ng-href="#/projects/{{ o.id }}/files" rel="tooltip" title="Arquivos"><i class="glyphicon glyphicon-search"></i>{{ length }}</a></td>
 								<td><a ng-href="#/projects/{{ o.id }}/remove" rel="tooltip" title="Excluir"><i class="glyphicon glyphicon-trash"></i></a></td>
 							</tr>
 						</tbody>
